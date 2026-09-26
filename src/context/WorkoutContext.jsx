@@ -9,9 +9,15 @@ export function WorkoutProvider({ children }) {
   const [plan, setPlan] = useState([]);
   const [saved, setSaved] = useState([]);
 
+  function getId(item) {
+    return String(item.id || item._id);
+  }
+
   function addToPlan(workout) {
+    const workoutId = getId(workout);
+
     const alreadyAdded = plan.some(
-      (item) => String(item.id || item._id) === String(workout.id || workout._id)
+      (item) => getId(item) === workoutId
     );
 
     if (alreadyAdded) {
@@ -19,13 +25,22 @@ export function WorkoutProvider({ children }) {
       return;
     }
 
-    setPlan((prev) => [...prev, workout]);
+    setPlan((prev) => [
+      ...prev,
+      {
+        ...workout,
+        completed: false,
+      },
+    ]);
+
     toast.success("Added to today's plan");
   }
 
   function addToSaved(workout) {
+    const workoutId = getId(workout);
+
     const alreadySaved = saved.some(
-      (item) => String(item.id || item._id) === String(workout.id || workout._id)
+      (item) => getId(item) === workoutId
     );
 
     if (alreadySaved) {
@@ -34,27 +49,43 @@ export function WorkoutProvider({ children }) {
     }
 
     setSaved((prev) => [...prev, workout]);
+
     toast.success("Saved for later");
   }
 
   function removeFromPlan(id) {
     setPlan((prev) =>
       prev.filter(
-        (item) => String(item.id || item._id) !== String(id)
+        (item) => getId(item) !== String(id)
       )
     );
 
-    toast.success("Removed from today's plan");
+    toast.success("Workout removed from today's plan");
   }
 
   function removeFromSaved(id) {
     setSaved((prev) =>
       prev.filter(
-        (item) => String(item.id || item._id) !== String(id)
+        (item) => getId(item) !== String(id)
       )
     );
 
-    toast.success("Removed from saved workouts");
+    toast.success("Workout removed from saved");
+  }
+
+  function markAsDone(id) {
+    setPlan((prev) =>
+      prev.map((item) =>
+        getId(item) === String(id)
+          ? {
+              ...item,
+              completed: true,
+            }
+          : item
+      )
+    );
+
+    toast.success("Workout marked as done");
   }
 
   return (
@@ -66,6 +97,7 @@ export function WorkoutProvider({ children }) {
         addToSaved,
         removeFromPlan,
         removeFromSaved,
+        markAsDone,
       }}
     >
       {children}
