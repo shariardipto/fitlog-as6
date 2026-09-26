@@ -1,6 +1,11 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { toast } from "sonner";
 
 const WorkoutContext = createContext(null);
@@ -9,32 +14,78 @@ export function WorkoutProvider({ children }) {
   const [plan, setPlan] = useState([]);
   const [saved, setSaved] = useState([]);
 
+  const [hydrated, setHydrated] = useState(false);
+
+useEffect(() => {
+  try {
+    const storedPlan = localStorage.getItem("fitlog-plan");
+    const storedSaved = localStorage.getItem("fitlog-saved");
+
+    if (storedPlan) {
+      setPlan(JSON.parse(storedPlan));
+    }
+
+    if (storedSaved) {
+      setSaved(JSON.parse(storedSaved));
+    }
+  } catch (error) {
+    console.error("Could not load FitLog data", error);
+  } finally {
+    setHydrated(true);
+  }
+}, []);
+
+useEffect(() => {
+  if (!hydrated) return;
+
+  localStorage.setItem(
+    "fitlog-plan",
+    JSON.stringify(plan)
+  );
+}, [plan, hydrated]);
+
+useEffect(() => {
+  if (!hydrated) return;
+
+  localStorage.setItem(
+    "fitlog-saved",
+    JSON.stringify(saved)
+  );
+}, [saved, hydrated]);
+
   function getId(item) {
     return String(item.id || item._id);
   }
 
-  function addToPlan(workout) {
+    function addToPlan(workout) {
     const workoutId = getId(workout);
 
     const alreadyAdded = plan.some(
-      (item) => getId(item) === workoutId
+        (item) => getId(item) === workoutId
     );
 
     if (alreadyAdded) {
-      toast.error("Workout already in today's plan");
-      return;
+        toast.error("Workout already in today's plan");
+        return;
+    }
+
+    if (plan.length >= 5) {
+        toast.error(
+        "Today's plan can contain a maximum of 5 workouts"
+        );
+        return;
     }
 
     setPlan((prev) => [
-      ...prev,
-      {
+        ...prev,
+        {
         ...workout,
         completed: false,
-      },
+        },
     ]);
 
     toast.success("Added to today's plan");
-  }
+    }
 
   function addToSaved(workout) {
     const workoutId = getId(workout);
