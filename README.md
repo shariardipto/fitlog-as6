@@ -9,10 +9,7 @@ Users can browse workouts, view workout details, add exercises to today's plan, 
 ## 🔗 Live Website
 
 **Live Link:**  
-Add your Netlify live link here
-
-**GitHub Repository:**  
-Add your GitHub repository link here
+(https://fitlog-as6.netlify.app/)
 
 ---
 
@@ -52,7 +49,17 @@ Add your GitHub repository link here
 
 ---
 
-## 🌐 API
+# 🌐 API Integration
+
+FitLog uses an external REST API to load workout information dynamically.
+
+## API Responsibilities
+
+The API is used for two main purposes:
+
+### 1. Fetch All Workout Data
+
+The homepage retrieves the complete workout collection from:
 
 ### All Workouts
 
