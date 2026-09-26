@@ -3,9 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useWorkout } from "@/context/WorkoutContext";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { plan, saved } = useWorkout();
 
   const workoutActive =
     pathname === "/" || pathname.startsWith("/workout/");
@@ -68,18 +70,18 @@ export default function Navbar() {
             <span>Plan</span>
 
             <span className="flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#caff00] px-1 text-[10px] font-bold text-black">
-              0
+              {plan.length}
             </span>
           </Link>
 
           <Link
-            href="/my-plan"
+            href="/saved"
             className="flex items-center gap-2 text-[#9a9ca3]"
           >
             <span>Saved</span>
 
             <span className="flex h-[18px] min-w-[18px] items-center justify-center rounded-full border border-[#4a4d55] px-1 text-[10px] font-bold text-[#b8bac0]">
-              0
+              {saved.length}
             </span>
           </Link>
         </div>

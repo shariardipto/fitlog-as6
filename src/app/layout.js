@@ -1,5 +1,7 @@
 import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
+import { WorkoutProvider } from "@/context/WorkoutContext";
+import { Toaster } from "sonner";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -27,11 +29,20 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.variable} ${oswald.variable} antialiased`}>
-        <Navbar />
+        <WorkoutProvider>
+          <Navbar />
 
-        <main className="min-h-screen">{children}</main>
+          <main className="min-h-screen">
+            {children}
+          </main>
 
-        <Footer />
+          <Footer />
+
+          <Toaster
+            position="top-right"
+            richColors
+          />
+        </WorkoutProvider>
       </body>
     </html>
   );
