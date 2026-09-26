@@ -6,7 +6,7 @@ import { fallbackWorkouts } from "@/data/workouts";
 async function getWorkout(id) {
   try {
     const res = await fetch(
-      `https://api.abcz.workers.dev/api/fitlog/${id}`,
+      `https://api.api-store.workers.dev/api/fitlog/${id}`,
       {
         cache: "force-cache",
       }
