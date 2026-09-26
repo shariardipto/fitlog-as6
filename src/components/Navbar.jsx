@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -13,46 +13,46 @@ export default function Navbar() {
   const planActive = pathname === "/my-plan";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#252525] bg-[#090909]/95 backdrop-blur-md">
-      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="border-b border-[#1e2127] bg-[#090b0e]">
+      <div className="mx-auto flex h-[70px] max-w-[1440px] items-center justify-between px-5 sm:px-6">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-        <Image
+        <Link href="/" className="flex items-center flex items-center gap-3">
+          <Image
             src="/logo.png"
-            alt="FitLog Logo"
-            width={40}
+            alt="FitLog"
+            width={110}
             height={40}
-            className="h-10 w-auto object-contain"
-        />
-
+            priority
+            className="h-[32px] w-auto object-contain"
+          />
         <span
-            className="text-xl font-bold tracking-wider"
+            className="text-[18px] font-bold uppercase tracking-[0.03em] text-white"
             style={{ fontFamily: "var(--font-oswald)" }}
         >
             FITLOG
         </span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-8 md:flex">
+        {/* Navigation */}
+        <nav className="hidden items-center gap-2 md:flex">
           <Link
             href="/"
-            className={`text-sm font-semibold uppercase tracking-wider ${
+            className={`rounded-full px-4 py-2 text-[12px] font-semibold ${
               workoutActive
-                ? "text-[#ccff00]"
-                : "text-neutral-400 hover:text-white"
+                ? "bg-[#17220b] text-[#caff00]"
+                : "text-[#9a9ca3] hover:text-white"
             }`}
           >
-            Workout
+            Workouts
           </Link>
 
           <Link
             href="/my-plan"
-            className={`text-sm font-semibold uppercase tracking-wider ${
+            className={`rounded-full px-4 py-2 text-[12px] font-semibold ${
               planActive
-                ? "text-[#ccff00]"
-                : "text-neutral-400 hover:text-white"
+                ? "bg-[#17220b] text-[#caff00]"
+                : "text-[#9a9ca3] hover:text-white"
             }`}
           >
             My Plan
@@ -60,47 +60,31 @@ export default function Navbar() {
         </nav>
 
         {/* Counters */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-6 text-[11px]">
           <Link
             href="/my-plan"
-            className="rounded-full bg-[#ccff00] px-3 py-1.5 text-xs font-bold uppercase text-black"
+            className="flex items-center gap-2 text-[#d8d8d8]"
           >
-            Plan 0
+            <span>Plan</span>
+
+            <span className="flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#caff00] px-1 text-[10px] font-bold text-black">
+              0
+            </span>
           </Link>
 
           <Link
             href="/my-plan"
-            className="rounded-full border border-neutral-600 px-3 py-1.5 text-xs font-bold uppercase text-white hover:border-[#ccff00]"
+            className="flex items-center gap-2 text-[#9a9ca3]"
           >
-            Saved 0
+            <span>Saved</span>
+
+            <span className="flex h-[18px] min-w-[18px] items-center justify-center rounded-full border border-[#4a4d55] px-1 text-[10px] font-bold text-[#b8bac0]">
+              0
+            </span>
           </Link>
         </div>
+
       </div>
-
-      {/* Mobile Navigation */}
-      <nav className="flex border-t border-[#202020] md:hidden">
-        <Link
-          href="/"
-          className={`flex-1 py-3 text-center text-xs font-bold uppercase ${
-            workoutActive
-              ? "bg-[#ccff00] text-black"
-              : "text-neutral-400"
-          }`}
-        >
-          Workout
-        </Link>
-
-        <Link
-          href="/my-plan"
-          className={`flex-1 py-3 text-center text-xs font-bold uppercase ${
-            planActive
-              ? "bg-[#ccff00] text-black"
-              : "text-neutral-400"
-          }`}
-        >
-          My Plan
-        </Link>
-      </nav>
     </header>
   );
 }
