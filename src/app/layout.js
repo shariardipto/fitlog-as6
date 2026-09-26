@@ -18,6 +18,9 @@ export const metadata = {
   title: "FitLog | Workout Library",
   description:
     "Train with intent, build your workout plan, and log every set.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
