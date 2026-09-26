@@ -1,4 +1,4 @@
-import { Dumbbell } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -7,9 +7,13 @@ export default function Footer() {
 
         <div className="flex items-center gap-2">
 
-          <div className="flex h-8 w-8 items-center justify-center bg-[#ccff00] text-black">
-            <Dumbbell size={17} />
-          </div>
+        <Image
+        src="/logo.png"
+        alt="FitLog Logo"
+        width={36}
+        height={36}
+        className="h-9 w-auto object-contain"
+        />
 
           <span
             className="text-lg font-bold tracking-wide"

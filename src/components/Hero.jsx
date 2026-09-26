@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
@@ -20,11 +21,11 @@ export default function Hero() {
             className="text-5xl font-bold uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl"
             style={{ fontFamily: "var(--font-oswald)" }}
           >
-            Train With Intent.
+            Train With Intent. Log
             <br />
 
             <span className="text-[#ccff00]">
-              Log Every Set.
+            Every Set.
             </span>
           </h1>
 
@@ -47,22 +48,25 @@ export default function Hero() {
 
         </div>
 
-        {/* Right Side */}
-        <div
-          className="relative min-h-[400px] bg-cover bg-center lg:min-h-full"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1400&q=85')",
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#090909] via-black/10 to-transparent" />
+{/* Right Side */}
+        <div className="relative flex min-h-[420px] items-center justify-center overflow-hidden lg:min-h-[560px]">
 
-          <div className="absolute bottom-6 right-6 border border-white/20 bg-black/70 px-4 py-3 backdrop-blur-sm">
+        <Image
+            src="/banner.png"
+            alt="FitLog workout"
+            width={600}
+            height={600}
+            priority
+            className="h-auto w-[65%] max-w-[430px] object-contain"
+        />
+
+        <div className="absolute bottom-6 right-6 border border-white/20 bg-black/70 px-4 py-3">
             <p className="text-xs font-bold tracking-[0.2em] text-[#ccff00]">
-              TRAIN • TRACK • REPEAT
+            TRAIN • TRACK • REPEAT
             </p>
-          </div>
         </div>
+
+</div>
 
       </div>
     </section>

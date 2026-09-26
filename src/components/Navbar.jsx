@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Dumbbell } from "lucide-react";
+import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -18,16 +18,20 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center bg-[#ccff00] text-black">
-            <Dumbbell size={20} strokeWidth={2.5} />
-          </div>
+        <Image
+            src="/logo.png"
+            alt="FitLog Logo"
+            width={40}
+            height={40}
+            className="h-10 w-auto object-contain"
+        />
 
-          <span
+        <span
             className="text-xl font-bold tracking-wider"
             style={{ fontFamily: "var(--font-oswald)" }}
-          >
+        >
             FITLOG
-          </span>
+        </span>
         </Link>
 
         {/* Desktop Navigation */}
